@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nura Spring Dynamics - Smart Suspensions. Smarter Drives.</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     Navigation 
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 16L4 10M16 16L28 10M16 16V28" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span>Nura Spring</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="live-cam.html">Live Cam</a></li>
+                <li><a href="analysis.html">Analysis</a></li>
+                <li><a href="technology.html">Technology</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.657 4.343L14.243 5.757M5.757 14.243L4.343 15.657M15.657 15.657L14.243 14.243M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M17 10.5C16.1 14.4 12.6 17 8.5 17C4.4 17 1 13.6 1 9.5C1 5.4 3.6 1.9 7.5 1C7.2 1.9 7 2.9 7 4C7 8.4 10.6 12 15 12C15.8 12 16.5 11.8 17 11.5V10.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+     Hero Section 
+    <section class="hero">
+        <div class="hero-background">
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Next-Gen Automotive Technology</div>
+            <h1 class="hero-title">Smart Suspensions.<br>Smarter Drives.</h1>
+            <p class="hero-description">Revolutionary AI-powered suspension systems that analyze terrain in real-time, automatically adjusting to provide the smoothest, safest ride possible.</p>
+            <div class="hero-buttons">
+                <a href="contact.html" class="btn btn-primary">Get Started</a>
+                <a href="technology.html" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 7L12 10L8 13V7Z" fill="currentColor"/>
+                    </svg>
+                    Watch Demo
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+     Features Overview 
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Intelligent Terrain Detection</h2>
+                <p>Our advanced camera systems and AI algorithms work together to keep you safe and comfortable</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="4" y="8" width="24" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 12V8M16 24V20M20 16H24M8 16H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Analysis</h3>
+                    <p>Front-mounted cameras continuously scan the road ahead, detecting obstacles before you reach them.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="16" cy="16" r="4" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Automatic Adjustment</h3>
+                    <p>Suspension settings adapt instantly to terrain conditions, ensuring optimal comfort and safety.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="6" y="6" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 12H26M12 6V26" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="19" cy="19" r="3" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Performance Reports</h3>
+                    <p>Detailed analytics and insights about your vehicle's performance and terrain conditions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="4" y="4" width="24" height="24" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M4 12H28M12 4V28" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 16L20 20M20 16L16 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>In-App Monitoring</h3>
+                    <p>Track everything from your smartphone with our intuitive mobile application.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     Stats Section 
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="99.9">0</div>
+                    <div class="stat-label">Detection Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">MS Response Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="10000">0</div>
+                    <div class="stat-label">Vehicles Equipped</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="45">0</div>
+                    <div class="stat-label">Smoother Ride</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     CTA Section 
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Drive?</h2>
+                <p>Join thousands of drivers experiencing the future of automotive suspension technology.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+     Footer 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M16 16L4 10M16 16L28 10M16 16V28" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <span>Nura Spring Dynamics</span>
+                    </div>
+                    <p>Revolutionizing automotive suspension with intelligent terrain detection and real-time adaptation.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="live-cam.html">Live Demo</a></li>
+                        <li><a href="analysis.html">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 3c0 1.1-.7 2-2 2-1.2 0-2-.9-2-1.9C1 2 1.8 1 3 1s2 .9 2 2zM1 19h4V6H1v13zM14.6 6.2c-2.1 0-3.3 1.2-3.8 2h-.1l-.2-1.7H6.9c0 1.1.1 2.4.1 3.9V19h4v-7.1c0-.4 0-.7.1-1 .3-.7.8-1.6 1.9-1.6 1.4 0 2 1.2 2 2.8V19h4v-7.4c0-3.7-1.9-5.4-4.4-5.4z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.137 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Nura Spring Dynamics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
