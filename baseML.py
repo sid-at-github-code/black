@@ -2,7 +2,7 @@
 import cv2
 import numpy as np
 
-VIDEO_IN  = "pothole_road_sample1.mp4"
+VIDEO_IN  = "pothole_road_sample4.mp4"
 
 # TUNABLE PARAMETERS (start with these; tweak if many false+ or misses)
 MIN_AREA        = 6000     

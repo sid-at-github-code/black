@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 
-VIDEO_IN  = "pothole_road_sample1.mp4"
+VIDEO_IN  = "pothole_road_sample2.mp4"
 
 # TUNABLE PARAMETERS (start with these; tweak if many false+ or misses)
 MIN_AREA        = 6000
@@ -11,7 +11,7 @@ DARK_MEAN_THRESH= 200
 ASPECT_RATIO_MIN= 1.2
 ASPECT_RATIO_MAX= 3.2
 ROI_Y_START_FRAC = 0.35
-
+ 
 CONFIRM_FRAMES   = 3   
 MAX_LOST_FRAMES  = 5    
 MAX_MATCH_DIST   = 60   
@@ -153,6 +153,8 @@ while True:
             unique_pothole_count += 1
             # Only print when we confirm a stable new pothole
             print("signal----------")
+            # THE IOT API CALL HAPENS HERE, 
+            
             print(f"Confirmed pothole id={tid} at frame {frame_idx} (seen {tdata['consecutive']} consecutive frames).")
 
     # Remove stale tracks
