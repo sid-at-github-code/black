@@ -1,34 +1,33 @@
 /*
-  pothole_esp.ino
-  ===============
-  ESP8266 HTTP polling via mDNS service discovery.
-  Finds carserver._http._tcp.local, polls GET /status every 500ms.
-  If blink=true → flash LED + buzzer.
+  LED + SERVO HTTP FAST API CONNECTION
 */
 
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>
 #include <ArduinoJson.h>
+#include <Servo.h>
 
 // ── CONFIG ──
 const char* WIFI_SSID  = "Airtel_Jarvis_0206";
 const char* WIFI_PASS  = "diodeop0206";
-const int   SERVER_PORT = 8000;
+const int   SERVER_PORT = 5000;
 
 const int LED_PIN    = 2;      // GPIO2 (D4) — onboard LED, active LOW
-const int BUZZER_PIN = 14;     // GPIO14 (D5) — buzzer pin
+const int SERVO_PIN  = 5;      // GPIO5 (D1) — servo signal
 const int POLL_MS    = 500;
 
 WiFiClient wifiClient;
 String serverIP = "";
+Servo servo1;
 
 void setup() {
   Serial.begin(115200);
   pinMode(LED_PIN, OUTPUT);
-  pinMode(BUZZER_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
-  digitalWrite(BUZZER_PIN, LOW);
+
+  servo1.attach(SERVO_PIN);
+  servo1.write(90);  // rest position
 
   WiFi.begin(WIFI_SSID, WIFI_PASS);
   Serial.print("Connecting WiFi");
@@ -66,15 +65,26 @@ void resolveServer() {
   Serial.println("mDNS resolve failed — will retry in loop");
 }
 
-void doBlink() {
+void doAlert() {
+  // LED blink
   for (int i = 0; i < 3; i++) {
-    digitalWrite(LED_PIN, LOW);
-    digitalWrite(BUZZER_PIN, HIGH);
+    digitalWrite(LED_PIN, LOW);   // ON (active low)
     delay(150);
-    digitalWrite(LED_PIN, HIGH);
-    digitalWrite(BUZZER_PIN, LOW);
+    digitalWrite(LED_PIN, HIGH);  // OFF
     delay(100);
   }
+
+  // Servo sequence: 45° (160ms) → wait 2s → 135° (160ms) → back to 90°
+  servo1.write(45);
+  delay(160);
+
+  servo1.write(90);
+  delay(2000);
+
+  servo1.write(135);
+  delay(160);
+
+  servo1.write(90);  // back to rest
 }
 
 void loop() {
@@ -107,7 +117,7 @@ void loop() {
       int count  = doc["count"] | 0;
       if (blink) {
         Serial.println("POTHOLE! Count: " + String(count));
-        doBlink();
+        doAlert();
       }
     }
   } else if (code < 0) {

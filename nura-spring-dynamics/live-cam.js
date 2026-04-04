@@ -235,7 +235,44 @@ function showAlert(type) {
   console.log(`[v0] Alert: ${type} detected ahead!`)
 }
 
-// Initialize and animate
+// ─── Real server polling ─────────────────────────────────────────────────────
+// Fetches /status from the FastAPI server (same host, same port).
+// When blink=true the server confirmed a new pothole; we add it to the list
+// and keep potholeCount in sync with the authoritative server count.
+
+let lastServerCount = 0
+
+async function pollStatus() {
+  try {
+    const res = await fetch("/status")
+    if (!res.ok) return
+    const data = await res.json()
+
+    // Sync pothole count display with server truth
+    if (data.count !== lastServerCount) {
+      const diff = data.count - lastServerCount
+      lastServerCount = data.count
+      potholeCount = data.count
+      document.getElementById("potholeCount").textContent = potholeCount
+
+      // For each new pothole confirmed by server, add a real detection entry
+      for (let i = 0; i < diff; i++) {
+        addDetectionToList("pothole")
+        adjustmentCount++
+        document.getElementById("adjustmentCount").textContent = adjustmentCount
+        if (settings.alertsEnabled) showAlert("pothole")
+      }
+    }
+  } catch (_) {
+    // Server not reachable — simulation keeps running on its own
+  }
+}
+
+// Poll every second
+setInterval(pollStatus, 1000)
+pollStatus()
+
+// ─── Initialize and animate ──────────────────────────────────────────────────
 const roadSim = new RoadSimulator()
 
 function animate() {
@@ -246,4 +283,4 @@ function animate() {
 
 animate()
 
-console.log("[v0] Live cam simulation started")
+console.log("[v0] Live cam simulation started — polling /status for real detections")

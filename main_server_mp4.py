@@ -1,14 +1,14 @@
 """
-pothole_server_cam.py  { PERFECT, FINAL , DONT TOUCH THIS }
+pothole_server_mp4.py  { PERFECT, FINAL , DONT TOUCH THIS }
 =====================
-FastAPI server + Pothole detection (WEBCAM only).
+FastAPI server + Pothole detection (MP4 VIDEO only).
 mDNS hostname: carserver.local:8000
 
 Install deps:
     pip install fastapi uvicorn opencv-python numpy zeroconf
 
 Run:
-    python pothole_server_cam.py
+    python pothole_server_mp4.py
 """
 
 import asyncio
@@ -31,9 +31,7 @@ import socket
 # ─────────────────────────────────────────────
 #  CONFIG
 # ─────────────────────────────────────────────
-CAM_INDEX      = 0             # change if you have multiple cameras
-CAM_WIDTH      = 1280
-CAM_HEIGHT     = 720
+SOURCE         = r"C:\suspension-cv\pothole_road_sample2.mp4"   # 🎥 VIDEO
 
 MDNS_HOSTNAME  = "carserver"
 SERVER_HOST    = "0.0.0.0"
@@ -86,22 +84,19 @@ def trigger_blink():
 
 
 # ─────────────────────────────────────────────
-#  ML LOOP  (webcam only)
+#  ML LOOP  (mp4 video only)
 # ─────────────────────────────────────────────
 def run_ml_pipeline():
     global ml_running, unique_pothole_count
 
     print("\n[ML] ─────────────────────────────────────────")
-    print(f"[ML] Opening WEBCAM index={CAM_INDEX} via DirectShow...")
-    cap = cv2.VideoCapture(CAM_INDEX, cv2.CAP_DSHOW)
+    print(f"[ML] Opening VIDEO file: {SOURCE}")
+    cap = cv2.VideoCapture(SOURCE)
 
     if not cap.isOpened():
-        print(f"[ML] ❌ Cannot open webcam index={CAM_INDEX}")
+        print(f"[ML] ❌ Cannot open video file: {SOURCE}")
         ml_running = False
         return
-
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH,  CAM_WIDTH)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, CAM_HEIGHT)
 
     W   = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     H   = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -122,9 +117,8 @@ def run_ml_pipeline():
     while ml_running:
         ret, frame = cap.read()
         if not ret:
-            print("[ML] ⚠️  Frame grab failed — retrying...")
-            time.sleep(0.05)
-            continue
+            print("[ML] ⚠️  End of video or frame grab failed — stopping.")
+            break
 
         frame_idx += 1
         y_start = int(H * ROI_Y_START_FRAC)
@@ -242,7 +236,7 @@ def run_ml_pipeline():
         cv2.putText(frame, f"Potholes: {unique_pothole_count}",
                     (10, 28), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
 
-        cv2.imshow('Pothole Detector [CAM] — Q to quit', frame)
+        cv2.imshow('Pothole Detector [MP4] — Q to quit', frame)
         if cv2.waitKey(delay) & 0xFF in (ord('q'), 27):
             print("[ML] 🛑 User pressed Q — stopping.")
             break
@@ -317,7 +311,7 @@ async def lifespan(app: FastAPI):
     print("[Server] 👋 Done.")
 
 
-app = FastAPI(title="Pothole IoT Server — CAM", lifespan=lifespan)
+app = FastAPI(title="Pothole IoT Server — MP4", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -340,8 +334,8 @@ def get_status():
 @app.get("/")
 async def root():
     return {
-        "mode": "webcam",
-        "cam_index": CAM_INDEX,
+        "mode": "mp4",
+        "source": SOURCE,
         "endpoint": f"http://{MDNS_HOSTNAME}.local:{SERVER_PORT}/status",
         "ml_running": ml_running,
         "potholes": unique_pothole_count,
@@ -361,8 +355,8 @@ app.mount("/ui", StaticFiles(directory=_STATIC_DIR, html=True), name="frontend")
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 55)
-    print("  🛣️  Pothole IoT Server  [WEBCAM MODE — HTTP]")
-    print(f"  CAM  : index {CAM_INDEX}  ({CAM_WIDTH}x{CAM_HEIGHT})")
+    print("  🛣️  Pothole IoT Server  [MP4 MODE — HTTP]")
+    print(f"  SRC  : {SOURCE}")
     print(f"  mDNS : {MDNS_HOSTNAME}.local:{SERVER_PORT}")
     print(f"  Poll : http://{MDNS_HOSTNAME}.local:{SERVER_PORT}/status")
     print("=" * 55)
